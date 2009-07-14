@@ -8,9 +8,13 @@ def getTemp():
 	ser.flush()
 	ser.close()
 	#conversation done acording to maxim-ic documentation for DS18S20
-	TEMP_LSB = int(value.split(' ')[9], 16)
-	TEMP_MSB = int(value.split(' ')[10], 16)
-	COUNT_REMAIN = int(value.split(' ')[15], 16)
+	try:
+		TEMP_LSB = int(value.split(' ')[9], 16)
+		TEMP_MSB = int(value.split(' ')[10], 16)
+		COUNT_REMAIN = int(value.split(' ')[15], 16)
+	except:
+		print "DEBUG", value
+		quit()
 	if (TEMP_MSB == 0):
 		#positve temerature
 		TEMP_READ = TEMP_LSB*0.5 

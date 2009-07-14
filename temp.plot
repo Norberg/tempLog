@@ -6,10 +6,10 @@ set ylabel "Celcius"
 set terminal png
 set output "temp.png"
 set datafile separator "|"
-set style data linespoint
+set style data lines
+set grid
+set yrange [0:*]
 set xdata time
-set timefmt "%y-%m-%d %H:%M"
-set xrange ["2008-07-12 00:00":"2009-07-13 00:00"]
-set format x "%y-%m-%d %H:%M"
-#set timefmt "%y-%m-%d"
-plot "< sqlite3 temp.db 'select date, temp from temp'" using 1:2 title "test"
+set timefmt x "%H:%M"
+set format x "%H:%M"
+plot "< sqlite3 temp.db \"SELECT time, degree from temp where date = date('now') order by time;\"" using 1:2 title "test"
